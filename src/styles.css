@@ -1,0 +1,63 @@
+/* styles.css */
+nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+nav > button {
+  background-color: rgba(128, 128, 128, 0.5);
+  width: 100%;
+  text-align: center;
+  vertical-align: center;
+  height: 25px;
+  letter-spacing: 0.3em;
+  border-radius: 5px;
+  border: 1px solid rgb(128, 128, 128);
+}
+
+nav > button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+body {
+  box-sizing: border-box;
+  display: flex;
+  flex-shrink: 1;
+  flex-grow: 1;
+  flex-basis: auto;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0px;
+  font-family: Roboto, sans-serif;
+}
+
+body {
+  background: url(./images/urchin.svg) no-repeat center/100% rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  display: flex;
+  font-size: 70px;
+  letter-spacing: 0.5em;
+  justify-content: space-around;
+  align-items: center;
+  margin: 50px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: rgba(128, 128, 128, 0.5);
+  margin: 20px;
+  border-radius: 5px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgb(128, 128, 128);
+}
