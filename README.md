@@ -1,2 +1,3 @@
-# odin-restaurant-page
-The Odin Project's Restaurant Page Project
+# odin-todo-list
+
+The Odin Project's Todo List Project
