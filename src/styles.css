@@ -1,30 +1,4 @@
 /* styles.css */
-nav {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  gap: 20px;
-  padding-top: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-nav > button {
-  background-color: rgba(128, 128, 128, 0.5);
-  width: 100%;
-  text-align: center;
-  vertical-align: center;
-  height: 25px;
-  letter-spacing: 0.3em;
-  border-radius: 5px;
-  border: 1px solid rgb(128, 128, 128);
-}
-
-nav > button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-}
 
 body {
   box-sizing: border-box;
@@ -38,26 +12,192 @@ body {
   font-family: Roboto, sans-serif;
 }
 
-body {
-  background: url(./images/urchin.svg) no-repeat center/100% rgba(0, 0, 0, 0.1);
-}
-
-.title {
+.content {
   display: flex;
-  font-size: 70px;
-  letter-spacing: 0.5em;
-  justify-content: space-around;
-  align-items: center;
-  margin: 50px;
+  flex: 1 1 0;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: left;
 }
 
-.container {
+.sidebar {
+  background-color: blue;
+  display: flex;
+  flex: 1 1 0;
+  max-width: 20%;
+  min-width: 10%;
+  height: 100vh;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.projects {
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  background-color: rgba(128, 128, 128, 0.5);
-  margin: 20px;
-  border-radius: 5px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgb(128, 128, 128);
+  flex: 1 1 auto;
+}
+
+.sidebar > .projects > ul > li {
+  color: white;
+  list-style-type: none;
+  font-size: 30px;
+  text-wrap: wrap;
+  border: 1px solid black;
+}
+
+.sidebar > .controls > ul > li {
+  color: white;
+  list-style-type: none;
+  font-size: 30px;
+  text-wrap: wrap;
+  border: 1px solid black;
+}
+
+.project-view-area {
+  background-color: green;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  height: 100vh;
+  align-items: center;
+  justify-content: baseline;
+}
+
+.project-view {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  height: 100vh;
+  align-items: center;
+  justify-content: baseline;
+}
+
+.todo-card-area {
+  background-color: green;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: baseline;
+}
+
+.todo-card {
+  /* flex: 0 0 0; */
+  flex-direction: row;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(8, 1fr);
+  background-color: aqua;
+  padding: 10px;
+  margin: 25px;
+  border-radius: 10px;
+  column-gap: 4px;
+  /* row-gap: 8px; */
+}
+
+.project-title {
+  /* display: flex; */
+  flex-direction: row;
+  min-width: auto;
+  background-color: aqua;
+  padding: 10px;
+  margin: 25px;
+  border-radius: 10px;
+}
+
+.new-todo-card-button {
+  display: flex;
+  flex-direction: row;
+  background-color: aqua;
+  padding: 10px;
+  margin: 25px;
+  border-radius: 10px;
+}
+
+.card-title {
+  display: grid;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 8;
+  align-self: center;
+  /* justify-self: self-start; */
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.card-label {
+  font-weight: 600;
+}
+
+.card-date.card-label {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  color: orange;
+}
+
+.card-date.card-text {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 8;
+  color: green;
+}
+
+.card-priority.card-label {
+  /* display: grid; */
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  color: blue;
+}
+
+.card-priority.card-text {
+  /* display: grid; */
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 2;
+  grid-column-end: 8;
+  color: purple;
+}
+
+.card-description.card-label {
+  /* display: grid; */
+  grid-row-start: 4;
+  grid-row-end: 5;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  color: pink;
+}
+
+.card-description.card-text {
+  /* display: grid; */
+  grid-row-start: 4;
+  grid-row-end: 5;
+  grid-column-start: 2;
+  grid-column-end: 9;
+  overflow: hidden;
+  color: grey;
+}
+
+.card-notes.card-label {
+  /* display: grid; */
+  grid-row-start: 5;
+  grid-row-end: 6;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  color: bisque;
+}
+
+.card-notes.card-text {
+  grid-row-start: 5;
+  grid-row-end: 6;
+  grid-column-start: 2;
+  grid-column-end: 9;
+  /* text-wrap: none; */
+  overflow: hidden;
+  color: red;
 }
