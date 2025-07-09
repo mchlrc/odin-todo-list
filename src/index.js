@@ -53,5 +53,5 @@ printProjectsButton.addEventListener("click", () => {
   for (const project of projects) {
     project.printName();
   }
-  console.groupEnd;
+  console.groupEnd();
 });
