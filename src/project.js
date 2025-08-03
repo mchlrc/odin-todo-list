@@ -1,3 +1,5 @@
+// project.js
+import { TodoItem } from "./todo-item.js";
 class Project {
   constructor(name = null, todoItems = []) {
     const tempId = crypto.randomUUID();
@@ -7,6 +9,11 @@ class Project {
     this.name = name;
     this.todoItems = todoItems;
     this.id = tempId;
+  }
+
+  addToDoItem() {
+    const newTodo = new TodoItem("New ToDo");
+    this.todoItems.push(newTodo);
   }
 
   printName() {

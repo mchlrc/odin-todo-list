@@ -1,3 +1,5 @@
+// project-view.js
+import { Project } from "./project.js";
 import { TodoItem } from "./todo-item.js";
 import { TodoItemView } from "./todo-item-view.js";
 class ProjectView {
@@ -23,8 +25,7 @@ class ProjectView {
     newTodoButton.textContent = "New Todo Item";
     newTodoButton.classList.add("new-todo-card-button");
     newTodoButton.addEventListener("click", () => {
-      const newTodo = new TodoItem();
-      this.project.todoItems.push(newTodo);
+      this.project.addToDoItem();
       this.displayTodoItems(todoCardArea);
     });
     projectPage.appendChild(newTodoButton);
@@ -43,7 +44,7 @@ class ProjectView {
     }
 
     for (const todo of this.project.todoItems) {
-      const todoItemView = new TodoItemView(todo);
+      const todoItemView = new TodoItemView(todo, this.project, false);
       const toDoView = todoItemView.getTodoItemView();
       todoCardArea.appendChild(toDoView);
     }

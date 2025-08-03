@@ -12,6 +12,7 @@ class TodoItem {
     this.priority = priority;
     this.description = description;
     this.notes = notes;
+    this.id = crypto.randomUUID();
   }
 }
 

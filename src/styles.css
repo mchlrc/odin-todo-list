@@ -110,9 +110,9 @@ body {
   background-color: purple;
 } */
 
-.todo-card:focus-within {
+/* .todo-card:focus-within {
   background-color: red;
-}
+} */
 
 .project-title {
   /* display: flex; */

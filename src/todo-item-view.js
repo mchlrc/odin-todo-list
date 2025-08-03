@@ -1,31 +1,36 @@
 // todo-item-view.js
+import { Project } from "./project.js";
+import { TodoItem } from "./todo-item.js";
+
 class TodoItemView {
-  constructor(toDoItem) {
+  constructor(toDoItem, project, isEditMode) {
     this.toDoItem = toDoItem;
-    this.isEditMode = true;
-    this.isFocused = true;
+    this.project = project;
+    this.isEditMode = isEditMode;
   }
 
   getTodoItemView() {
     const todoCard = document.createElement("div");
+    const todoForm = document.createElement("form");
+    const editSaveButton = document.createElement("button");
+    const deleteButton = document.createElement("button");
+    const cardTitle = document.createElement("input");
+    const cardDate = document.createElement("input");
+    const cardDescription = document.createElement("input");
+    const cardPriority = document.createElement("input");
+    const cardNotes = document.createElement("input");
+    const cardDateLabel = document.createElement("label");
+    const cardPriorityLabel = document.createElement("label");
+    const cardDescriptionLabel = document.createElement("label");
+    const cardNotesLabel = document.createElement("label");
+
     todoCard.classList.add("todo-card");
     todoCard.tabIndex = -1;
-    // todoCard.addEventListener("click", () => {
-    //   const cards = document.querySelectorAll(".todo-card");
-    //   console.log(cards);
-    //   cards.forEach((card) => {
-    //     card.isFocused = false;
-    //   });
 
-    //   this.isFocused = true;
-    // });
-
-    const todoForm = document.createElement("form");
     todoForm.classList.add("todo-form");
     todoForm.method = "post";
     todoCard.appendChild(todoForm);
 
-    const cardTitle = document.createElement("input");
     cardTitle.classList.add("card-title");
     cardTitle.type = "text";
     cardTitle.value = this.toDoItem.title;
@@ -33,9 +38,9 @@ class TodoItemView {
     cardTitle.name = "card-title";
     cardTitle.autocomplete = "off";
     cardTitle.required = true;
+    cardTitle.readOnly = true;
 
-    const editSaveButton = document.createElement("button");
-    editSaveButton.textContent = "Save";
+    editSaveButton.textContent = "Edit";
     editSaveButton.classList.add("card-edit-save-button");
     editSaveButton.type = "button";
     editSaveButton.id = "edit";
@@ -44,19 +49,36 @@ class TodoItemView {
       this.isEditMode = !this.isEditMode;
       if (this.isEditMode) {
         e.target.textContent = "Save";
+        cardTitle.readOnly = false;
+        cardDate.readOnly = false;
+        cardDescription.readOnly = false;
+        cardPriority.readOnly = false;
+        cardNotes.readOnly = false;
       } else {
         e.target.textContent = "Edit";
+        cardTitle.readOnly = true;
+        cardDate.readOnly = true;
+        cardDescription.readOnly = true;
+        cardPriority.readOnly = true;
+        cardNotes.readOnly = true;
+        this.toDoItem.title = cardTitle.value;
+        this.toDoItem.date = cardDate.value;
+        this.toDoItem.description = cardDescription.value;
+        this.toDoItem.priority = cardPriority.value;
+        this.toDoItem.notes = cardNotes.value;
       }
     });
 
-    const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.classList.add("card-delete-button");
     deleteButton.type = "button";
     deleteButton.id = "delete";
     deleteButton.name = "card-delete-button";
+    deleteButton.addEventListener("click", (e) => {
+      console.log(`Deleting ${this.toDoItem.title} from ${this.project.name}`);
+      e.target.parentNode.parentNode.remove();
+    });
 
-    const cardDate = document.createElement("input");
     cardDate.classList.add("card-date");
     cardDate.classList.add("card-text");
     cardDate.type = "text";
@@ -65,14 +87,13 @@ class TodoItemView {
     cardDate.name = "card-date";
     cardDate.autocomplete = "off";
     cardDate.required = true;
+    cardDate.readOnly = true;
 
-    const cardDateLabel = document.createElement("label");
     cardDateLabel.classList.add("card-date");
     cardDateLabel.classList.add("card-label");
     cardDateLabel.htmlFor = "date";
     cardDateLabel.textContent = "Due";
 
-    const cardPriority = document.createElement("input");
     cardPriority.classList.add("card-priority");
     cardPriority.classList.add("card-text");
     cardPriority.type = "text";
@@ -81,15 +102,14 @@ class TodoItemView {
     cardPriority.value = this.toDoItem.priority;
     cardPriority.autocomplete = "off";
     cardPriority.required = true;
+    cardPriority.readOnly = true;
 
-    const cardPriorityLabel = document.createElement("label");
     cardPriorityLabel.classList.add("card-priority");
     cardPriorityLabel.classList.add("card-label");
     cardPriorityLabel.htmlFor = "priority";
     cardPriorityLabel.textContent = "Priority";
     cardPriority.defaultValue = "low";
 
-    const cardDescription = document.createElement("input");
     cardDescription.classList.add("card-description");
     cardDescription.classList.add("card-text");
     cardDescription.type = "text";
@@ -97,14 +117,13 @@ class TodoItemView {
     cardDescription.name = "card-description";
     cardDescription.value = this.toDoItem.description;
     cardDescription.autocomplete = "off";
+    cardDescription.readOnly = true;
 
-    const cardDescriptionLabel = document.createElement("label");
     cardDescriptionLabel.classList.add("card-description");
     cardDescriptionLabel.classList.add("card-label");
     cardDescriptionLabel.htmlFor = "description";
     cardDescriptionLabel.textContent = "Description";
 
-    const cardNotes = document.createElement("input");
     cardNotes.classList.add("card-notes");
     cardNotes.classList.add("card-text");
     cardNotes.type = "text";
@@ -112,8 +131,8 @@ class TodoItemView {
     cardNotes.name = "card-notes";
     cardNotes.value = this.toDoItem.notes;
     cardNotes.autocomplete = "off";
+    cardNotes.readOnly = true;
 
-    const cardNotesLabel = document.createElement("label");
     cardNotesLabel.classList.add("card-notes");
     cardNotesLabel.classList.add("card-label");
     cardNotesLabel.htmlFor = "notes";
@@ -134,17 +153,21 @@ class TodoItemView {
     return todoCard;
   }
 
-  onSave(e) {
-    console.log({ e });
-  }
+  // onEdit(e) {
+  //   console.log({ e });
+  //   e.parentNode.cardTitle.readOnly = false;
+  // }
+  // onSave(e) {
+  //   console.log({ e });
+  // }
 
-  onCancel(e) {
-    console.log({ e });
-  }
+  // onCancel(e) {
+  //   console.log({ e });
+  // }
 
-  onDelete(e) {
-    console.log({ e });
-  }
+  // onDelete(e) {
+  //   console.log({ e });
+  // }
 }
 
 export { TodoItemView };
