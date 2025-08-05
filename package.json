@@ -4,6 +4,7 @@
   "description": "The Odin Project's ToDo List Project",
   "main": "index.js",
   "scripts": {
+    "lint": "npx eslint src",
     "build": "webpack --config webpack.prod.js",
     "start": "webpack serve --config webpack.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1",
