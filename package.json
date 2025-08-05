@@ -1,7 +1,7 @@
 {
-  "name": "odin-restaurant-page",
+  "name": "odin-todo-list",
   "version": "1.0.0",
-  "description": "The Odin Project's Restaurant Page Project",
+  "description": "The Odin Project's ToDo List Project",
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
