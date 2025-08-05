@@ -1,8 +1,9 @@
 // todo-item-view.js
 import { Project } from "./project.js";
-import { TodoItem } from "./todo-item.js";
+import { ToDoItem } from "./todo-item.js";
+import { storageHelper } from "./storage-helper.js";
 
-class TodoItemView {
+class ToDoItemView {
   constructor(toDoItem, project, isEditMode) {
     this.toDoItem = toDoItem;
     this.project = project;
@@ -66,6 +67,7 @@ class TodoItemView {
         this.toDoItem.description = cardDescription.value;
         this.toDoItem.priority = cardPriority.value;
         this.toDoItem.notes = cardNotes.value;
+        storageHelper.updateStorage();
       }
     });
 
@@ -76,6 +78,15 @@ class TodoItemView {
     deleteButton.name = "card-delete-button";
     deleteButton.addEventListener("click", (e) => {
       console.log(`Deleting ${this.toDoItem.title} from ${this.project.name}`);
+      console.log(this.project.toDoItems);
+      const index = this.project.toDoItems.findIndex(
+        (tdi) => tdi.id === this.toDoItem.id
+      );
+      console.log(
+        `Deleting todo at index ${index} in project ${this.project.name}`
+      );
+      this.project.toDoItems.splice(index);
+      storageHelper.updateStorage();
       e.target.parentNode.parentNode.remove();
     });
 
@@ -170,4 +181,4 @@ class TodoItemView {
   // }
 }
 
-export { TodoItemView };
+export { ToDoItemView };

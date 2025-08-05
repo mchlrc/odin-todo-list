@@ -1,19 +1,19 @@
 // project.js
-import { TodoItem } from "./todo-item.js";
+import { ToDoItem } from "./todo-item.js";
 class Project {
-  constructor(name = null, todoItems = []) {
-    const tempId = crypto.randomUUID();
+  constructor(name = null, toDoItems = [], id = crypto.randomUUID()) {
     if (!name) {
-      name = `New Project ${tempId.slice(0, 3)}`;
+      name = `Project ${id.slice(0, 3)}`;
     }
     this.name = name;
-    this.todoItems = todoItems;
-    this.id = tempId;
+    this.toDoItems = toDoItems;
+    this.id = id;
   }
 
   addToDoItem() {
-    const newTodo = new TodoItem("New ToDo");
-    this.todoItems.push(newTodo);
+    const newTodo = new ToDoItem("New ToDo");
+    this.toDoItems.push(newTodo);
+    return;
   }
 
   printName() {

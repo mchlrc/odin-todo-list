@@ -1,24 +1,26 @@
 // index.js
 import "./styles.css";
 import { Project } from "./project.js";
+import { ToDoItem } from "./todo-item.js";
 import { ProjectView } from "./project-view.js";
+import { storageHelper } from "./storage-helper.js";
 
-const projects = [];
-let selectedProject = null;
+const projectViewArea = document.querySelector(".project-view-area");
+const projectsListView = document.querySelector(".project-list");
+if (storageHelper.projects.length > 0) {
+  storageHelper.projects.forEach((proj) => {
+    const listItem = createListItem(proj);
+    projectsListView.appendChild(listItem);
+  });
+}
 
 const newProjectButton = document.querySelector("#new-project-button");
 newProjectButton.addEventListener("click", () => {
-  console.log("Clicked New Project Button!");
-  const project = new Project();
-  project.printName();
-  projects.push(project);
-
+  const project = storageHelper.addProject();
   const projectView = new ProjectView(project);
   const listItem = projectView.createProjectListItem();
   listItem.addEventListener("click", () => {
-    const projectViewArea = document.querySelector(".project-view-area");
     console.log("clicked");
-
     const projectViews = document.querySelectorAll(".project-view");
     if (projectViews.length > 0) {
       projectViews.forEach((pv) => {
@@ -28,16 +30,6 @@ newProjectButton.addEventListener("click", () => {
     const newProjView = projectView.createProjectView();
     projectViewArea.appendChild(newProjView);
   });
-  console.log(listItem);
-
-  if (selectedProject === null) {
-    const projectViewArea = document.querySelector(".project-view-area");
-    const newProjView = projectView.createProjectView();
-    projectViewArea.appendChild(newProjView);
-    selectedProject = project;
-  }
-
-  const projectsListView = document.querySelector(".project-list");
   projectsListView.appendChild(listItem);
 });
 
@@ -46,12 +38,20 @@ editProjectsButton.addEventListener("click", () => {
   console.log("Clicked Edit Projects Button!");
 });
 
-const printProjectsButton = document.querySelector("#print-projects-button");
-printProjectsButton.addEventListener("click", () => {
-  console.group("printProjectsButton");
-  console.log("Clicked Print Projects Button!");
-  for (const project of projects) {
-    project.printName();
-  }
-  console.groupEnd();
-});
+function createListItem(project) {
+  const projectView = new ProjectView(project, () => {
+    localStorage.setItem("odin-todo-projects", JSON.stringify(projects));
+  });
+  const listItem = projectView.createProjectListItem();
+  listItem.addEventListener("click", () => {
+    const projectViews = document.querySelectorAll(".project-view");
+    if (projectViews.length > 0) {
+      projectViews.forEach((pv) => {
+        pv.remove();
+      });
+    }
+    const newProjView = projectView.createProjectView();
+    projectViewArea.appendChild(newProjView);
+  });
+  return listItem;
+}

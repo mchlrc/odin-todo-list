@@ -1,19 +1,20 @@
 // todo-item.js
-class TodoItem {
+class ToDoItem {
   constructor(
     title = "",
     date = "",
     priority = "",
     description = "",
-    notes = ""
+    notes = "",
+    id = crypto.randomUUID()
   ) {
     this.title = title;
     this.date = date;
     this.priority = priority;
     this.description = description;
     this.notes = notes;
-    this.id = crypto.randomUUID();
+    this.id = id;
   }
 }
 
-export { TodoItem };
+export { ToDoItem };
