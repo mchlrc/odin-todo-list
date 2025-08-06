@@ -1,7 +1,5 @@
 // index.js
 import "./styles.css";
-import { Project } from "./project.js";
-import { ToDoItem } from "./todo-item.js";
 import { ProjectView } from "./project-view.js";
 import { storageHelper } from "./storage-helper.js";
 
@@ -39,9 +37,7 @@ editProjectsButton.addEventListener("click", () => {
 });
 
 function createListItem(project) {
-  const projectView = new ProjectView(project, () => {
-    localStorage.setItem("odin-todo-projects", JSON.stringify(projects));
-  });
+  const projectView = new ProjectView(project);
   const listItem = projectView.createProjectListItem();
   listItem.addEventListener("click", () => {
     const projectViews = document.querySelectorAll(".project-view");

@@ -1,6 +1,4 @@
 // todo-item-view.js
-import { Project } from "./project.js";
-import { ToDoItem } from "./todo-item.js";
 import { storageHelper } from "./storage-helper.js";
 
 class ToDoItemView {
@@ -80,10 +78,10 @@ class ToDoItemView {
       console.log(`Deleting ${this.toDoItem.title} from ${this.project.name}`);
       console.log(this.project.toDoItems);
       const index = this.project.toDoItems.findIndex(
-        (tdi) => tdi.id === this.toDoItem.id
+        (tdi) => tdi.id === this.toDoItem.id,
       );
       console.log(
-        `Deleting todo at index ${index} in project ${this.project.name}`
+        `Deleting todo at index ${index} in project ${this.project.name}`,
       );
       this.project.toDoItems.splice(index);
       storageHelper.updateStorage();

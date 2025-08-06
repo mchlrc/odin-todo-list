@@ -1,6 +1,4 @@
 // project-view.js
-import { Project } from "./project.js";
-import { TodoItem } from "./todo-item.js";
 import { ToDoItemView } from "./todo-item-view.js";
 import { storageHelper } from "./storage-helper.js";
 
@@ -38,7 +36,7 @@ class ProjectView {
     deleteProjectButton.textContent = "delete";
     deleteProjectButton.type = "button";
     deleteProjectButton.classList.add("new-todo-card-button");
-    deleteProjectButton.addEventListener("click", (e) => {
+    deleteProjectButton.addEventListener("click", () => {
       // TBD Add project deletion functionality
       console.log("Add project deletion functionality");
       storageHelper.updateStorage();
@@ -62,7 +60,7 @@ class ProjectView {
         todo,
         this.project,
         false,
-        this.updateStorage
+        this.updateStorage,
       );
       const toDoView = todoItemView.getTodoItemView();
       todoCardArea.appendChild(toDoView);
