@@ -1,3 +1,3 @@
-# odin-todo-list
+# simple-todo-list
 
-The Odin Project's Todo List Project
+Simple To-Do list web app with browser storage.
